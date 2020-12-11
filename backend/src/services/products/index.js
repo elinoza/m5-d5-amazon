@@ -24,8 +24,8 @@ const productsDB =  await readDB(productsFilePath )
   router.get("/:id", async (req, res,next) => {
     try{
   const productsDB = await readDB(productsFilePath )
-  const project= productsDB.filter(project=> String(project.ID) === req.params.id)
-      if (project.length>0){res.send(project)}
+  const products= productsDB.filter(product=> String(product._id) === req.params.id)
+      if (products.length>0){res.send(products)}
       else {
         const err = new Error()
         err.httpStatusCode = 404
@@ -54,17 +54,17 @@ catch(error){
 })
 
 
-/// getting project with specific query 
+/// getting products with specific query 
 router.get("/", async(req, res,next) => {
   try{ 
       const productsDB =  await readDB(productsFilePath )
       if (req.query && req.query.name) {
-        const filteredprojects = productsDB.filter(
-          project =>
-            project.hasOwnProperty("name") &&
-            project.name.toLowerCase() === req.query.name.toLowerCase()
+        const filteredproductss = productsDB.filter(
+          products =>
+            products.hasOwnProperty("name") &&
+            products.name.toLowerCase() === req.query.name.toLowerCase()
         )
-        res.send(filteredprojects)
+        res.send(filteredproductss)
       } else {
         res.send(productsDB)
   }}
@@ -73,7 +73,7 @@ router.get("/", async(req, res,next) => {
     }
 })
 
-///POSTING NEW PROJECT
+///POSTING NEW products
 router.post("/", 
 [
   check("name")
@@ -82,16 +82,10 @@ router.post("/",
     .exists() ///What does this mean???
     .withMessage("Insert a name!"),
 ],
+
 [
-  check("RepoURL")
-    .isURL()
-    .withMessage("Repo should be an URL")
-    .exists() ///What does this mean???
-    .withMessage("add your repo!"),
-],
-[
-  check("StudentID")
-    .isLength({ min: 5 })
+  check("price")
+    .isNumeric()
     .withMessage("your Id should be at least 5 letter")
     .exists() ///What does this mean???
     .withMessage("add your student Id!"),
@@ -108,16 +102,17 @@ async (req, res, next) => {
             next(err)
           } else {
             const productsDB =  await readDB(productsFilePath )
-            const newproject = {
+            const newproducts = {
               ...req.body,
-              ID: uniqid(),
+              _id: uniqid(),
               modifiedAt: new Date(),
+
             }
     
-            productsDB.push(newproject)
+            productsDB.push(newproducts)
             await writeDB(productsFilePath ,productsDB )
     
-            res.status(201).send({ id: newproject.ID })
+            res.status(201).send({ id: newproducts.ID })
           }
         } 
         
@@ -131,7 +126,7 @@ router.put("/:id", async (req, res, next) => {
   try
   {
     const productsDB = await readDB(productsFilePath )
-  const project = productsDB.filter(project => String(project.ID) !== req.params.id)
+  const products = productsDB.filter(products => String(products.ID) !== req.params.id)
 
   const modifiedUser = {
     ...req.body,
@@ -139,8 +134,8 @@ router.put("/:id", async (req, res, next) => {
     modifiedAt: new Date(),
   }
 
-  project.push(modifiedUser)
-  await writeDB(productsFilePath ,project )
+  products.push(modifiedUser)
+  await writeDB(productsFilePath ,products )
   
 
   res.send({ id: modifiedUser.ID })}
@@ -153,8 +148,8 @@ router.put("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
   try {
     const productsDB = await readDB(productsFilePath )
-    const project  = productsDB.filter(project => project.ID !== req.params.id)
-    await writeDB(productsFilePath ,project  )
+    const products  = productsDB.filter(products => products.ID !== req.params.id)
+    await writeDB(productsFilePath ,products  )
 
     res.status(204).send()
   } catch (error) {
