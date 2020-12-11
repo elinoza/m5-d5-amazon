@@ -11,7 +11,7 @@ const upload = multer({})
 const router = express.Router()
 const productsFolderPath = path.join(__dirname, "../../../public/img/products")
 
-const productsFilePath = path.join(__dirname, "products.json")
+const productsFilePath = path.join(__dirname, "product.json")
 
 // FOR GETTING ALL PROJECTS
 router.get("/", async(req, res,next) => {
@@ -46,16 +46,17 @@ router.post("/:id/upload", upload.single("image"), async (req, res,next) => {
       path.join(productsFolderPath, req.params.id + ".jpg"),
       req.file.buffer
       )
-      res.send("ok")
+      //read json
+      //update product ımageUrl wıth 
+      
 
-    //   const productsDB = await readDB(productsFilePath )
-    // const products= productsDB.filter(product=> String(product._id) === req.params.id)
-    //   const imgpath= path.join(productsFolderPath, req.params.id + ".jpg",
-    //  product= {
-    //     ...product.body,
-    //     imageUrl: imgpath,
-        
-    //     modifiedAt: new Date()
+     const productsDB = await readDB(productsFilePath )
+     const updated = productsDB.map(product => String(product._id)===req.params.id ? {...product,updatedAt: new Date(), imageUrl: req.params.id + ".jpg"}: product)
+    
+     await writeDB(productsFilePath ,updated )
+     res.send("ok")
+
+     
 
     //   }
 
@@ -120,6 +121,7 @@ async (req, res, next) => {
               ...req.body,
               _id: uniqid(),
               createdAt: new Date(),
+              imageUrl: ``
 
             }
     
@@ -141,6 +143,7 @@ router.put("/:id", async (req, res, next) => {
   {
     const productsDB = await readDB(productsFilePath )
   const products = productsDB.filter(products => String(products._id) !== req.params.id)
+
 
   const modifiedUser = {
     ...req.body,
