@@ -4,7 +4,7 @@ const ListEndPoints= require("express-list-endpoints")
 const {join}= require("path")
 const ProductRouter = require("./services/products")
 
-// const ReviewsRouter = require ("./services/reviews")
+const ReviewsRouter = require ("./services/reviews")
 
 const {
     notFoundHandler,
@@ -23,6 +23,8 @@ const {
 
  server.use("/products", ProductRouter);
 //   server.use("/reviews", ReviewsRouter);
+//   server.use("/products", ProductRouter);
+  server.use("/reviews", ReviewsRouter);
   server.use(cors())
   console.log(ListEndPoints(server))
   server.use(notFoundHandler);
