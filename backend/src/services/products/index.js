@@ -4,7 +4,7 @@ const multer = require("multer")
 const { writeFile, createReadStream } = require("fs-extra")
 const path = require("path")
 const uniqid = require("uniqid")
-const { readDB, writeDB } = require("../../lib/utilities")
+const { readDB, writeDB } = require("../lib/utilities")
 const { check, validationResult } = require("express-validator")
 const upload = multer({})
 

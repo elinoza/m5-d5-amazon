@@ -5,7 +5,7 @@ const {writeFile}=require("fs-extra")
 var fs = require('fs'); 
 const uniqid = require("uniqid");
 
-const { readDB, writeDB } = require("../lib/utilities");
+const { readDB, writeDB } = require("../lib/utilities")
 const { check, validationResult } = require("express-validator");
 
 const { join } = require("path");
@@ -51,7 +51,7 @@ router.get("/", async (req, res,next) => {
       });
       router.post(
         "/",
-        [
+        
           check("comment")
             .exists()
             .isLength({ min: 1 })
@@ -74,9 +74,9 @@ router.get("/", async (req, res,next) => {
             .custom((val,{req})=>{
                 if(!productDB.find(product=> product._id===req.body.elementId)) {
                     throw new Error("The product id doesn't exists ") 
-            })
+            }})
             .withMessage("You need to have your product ID"),
-        ],
+        
         async (req, res, next) => {
           const errors = validationResult(req);
           if (!errors.isEmpty()) {
@@ -103,7 +103,7 @@ router.get("/", async (req, res,next) => {
 
             
           }
-        }
+        
       );
      
       router.put("/:id", async (req, res, next) => {
