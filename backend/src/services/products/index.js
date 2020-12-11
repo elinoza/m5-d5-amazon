@@ -9,7 +9,7 @@ const { check, validationResult } = require("express-validator")
 const upload = multer({})
 
 const router = express.Router()
-const productsFolderPath = path.join(__dirname, "../../public/img/projects")
+const productsFolderPath = path.join(__dirname, "../../../public/img/products")
 
 const productsFilePath = path.join(__dirname, "products.json")
 
@@ -39,13 +39,27 @@ const productsDB =  await readDB(productsFilePath )
 
 /// uploading image by id
 
-router.post("/:id/uploadPhoto", upload.single("image"), async (req, res,next) => {
+router.post("/:id/upload", upload.single("image"), async (req, res,next) => {
   try{
+    
     await writeFile(
       path.join(productsFolderPath, req.params.id + ".jpg"),
       req.file.buffer
       )
       res.send("ok")
+
+    //   const productsDB = await readDB(productsFilePath )
+    // const products= productsDB.filter(product=> String(product._id) === req.params.id)
+    //   const imgpath= path.join(productsFolderPath, req.params.id + ".jpg",
+    //  product= {
+    //     ...product.body,
+    //     imageUrl: imgpath,
+        
+    //     modifiedAt: new Date()
+
+    //   }
+
+     
 }
 catch(error){
   console.log(error)
@@ -86,7 +100,7 @@ router.post("/",
 [
   check("price")
     .isNumeric()
-    .withMessage("your Id should be at least 5 letter")
+    .withMessage("price should be numeric!")
     .exists() ///What does this mean???
     .withMessage("add your student Id!"),
 ],
@@ -105,7 +119,7 @@ async (req, res, next) => {
             const newproducts = {
               ...req.body,
               _id: uniqid(),
-              modifiedAt: new Date(),
+              createdAt: new Date(),
 
             }
     
@@ -126,19 +140,19 @@ router.put("/:id", async (req, res, next) => {
   try
   {
     const productsDB = await readDB(productsFilePath )
-  const products = productsDB.filter(products => String(products.ID) !== req.params.id)
+  const products = productsDB.filter(products => String(products._id) !== req.params.id)
 
   const modifiedUser = {
     ...req.body,
-    ID: req.params.id,
-    modifiedAt: new Date(),
+    _id: req.params.id,
+    updatedAt: new Date(),
   }
 
   products.push(modifiedUser)
   await writeDB(productsFilePath ,products )
   
 
-  res.send({ id: modifiedUser.ID })}
+  res.send({ id: modifiedUser._id})}
   catch(error){
     next(error)
   }
@@ -148,7 +162,7 @@ router.put("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
   try {
     const productsDB = await readDB(productsFilePath )
-    const products  = productsDB.filter(products => products.ID !== req.params.id)
+    const products  = productsDB.filter(products => products._id !== req.params.id)
     await writeDB(productsFilePath ,products  )
 
     res.status(204).send()
