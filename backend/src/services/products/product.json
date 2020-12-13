@@ -1,1 +1,77 @@
-[{"_id":1002,"name":"Box tape","description":"Packing tape, 2\"","brand":"samsung","price":"3.99","category":"phone"},{"_id":1003,"name":"Foam padding","description":"Packing foam for any size box","brand":"apple","price":"8.50","category":"phone"},{"_id":1004,"name":"Box tape","description":"Packing tape, 2\"","brand":"apple","price":"3.99","category":"phone"},{"name":"Box tape","description":"Packing tape, 2\"","brand":"samsung","price":"3.99","category":"phone","_id":"hoteu3pskik56io6","modifiedAt":"2020-12-11T10:43:09.701Z"},{"name":"NEW2","description":"Packing tape, 2\"","brand":"samsung","price":"3.99","category":"phone","_id":"hoteu4irkikacpyf","createdAt":"2020-12-11T13:07:57.158Z","imageUrl":"hoteu4irkikacpyf.jpg"}]
+[
+  {
+    "_id": 1002,
+    "name": "Box tape",
+    "description": "Packing tape, 2\"",
+    "brand": "samsung",
+    "price": "3.99",
+    "category": "phone",
+    "updatedAt": "2020-12-11T16:24:30.451Z",
+    "imageUrl": "1002.jpg"
+  },
+  {
+    "_id": 1003,
+    "name": "Foam padding",
+    "description": "Packing foam for any size box",
+    "brand": "apple",
+    "price": "8.50",
+    "category": "phone"
+  },
+  {
+    "_id": 1004,
+    "name": "Box tape",
+    "description": "Packing tape, 2\"",
+    "brand": "apple",
+    "price": "3.99",
+    "category": "phone"
+  },
+  {
+    "name": "Box tape",
+    "description": "Packing tape, 2\"",
+    "brand": "samsung",
+    "price": "3.99",
+    "category": "phone",
+    "_id": "hoteu3pskik56io6",
+    "modifiedAt": "2020-12-11T10:43:09.701Z"
+  },
+  {
+    "name": "NEW2",
+    "description": "Packing tape, 2\"",
+    "brand": "samsung",
+    "price": "3.99",
+    "category": "phone",
+    "_id": "hoteu4irkikacpyf",
+    "createdAt": "2020-12-11T13:07:57.158Z",
+    "imageUrl": "hoteu4irkikacpyf.jpg"
+  },
+  {
+    "name": "dsfgh",
+    "description": "dxgfch",
+    "brand": "dxfcb",
+    "price": "5",
+    "category": "book",
+    "_id": "hoteu8znkikhgs40",
+    "createdAt": "2020-12-11T16:27:03.887Z",
+    "imageUrl": ""
+  },
+  {
+    "name": "new",
+    "description": "new",
+    "brand": "new",
+    "price": "567",
+    "category": "Electronics",
+    "_id": "z4wu3kimzpp7d",
+    "createdAt": "2020-12-13T10:33:25.464Z",
+    "imageUrl": ""
+  },
+  {
+    "name": "new2",
+    "description": "new",
+    "brand": "dfxnm",
+    "price": "555",
+    "category": "book",
+    "_id": "z4wvekimzy0ga",
+    "createdAt": "2020-12-13T10:39:53.289Z",
+    "imageUrl": ""
+  }
+]
