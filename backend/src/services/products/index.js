@@ -24,7 +24,7 @@ const productsDB =  await readDB(productsFilePath )
   router.get("/:id", async (req, res,next) => {
     try{
   const productsDB = await readDB(productsFilePath )
-  const products= productsDB.filter(product=> product._id === req.params.id)
+  const products= productsDB.filter(product=> String(product._id) === req.params.id)
       if (products.length>0){res.send(products)}
       else {
         const err = new Error()
@@ -37,20 +37,46 @@ const productsDB =  await readDB(productsFilePath )
   }
 })
 
+/// uploading image by id
 
+router.post("/:id/upload", upload.single("image"), async (req, res,next) => {
+  try{
+    
+    await writeFile(
+      path.join(productsFolderPath, req.params.id + ".jpg"),
+      req.file.buffer
+      )
+      //read json
+      //update product ımageUrl wıth 
+      
+
+     const productsDB = await readDB(productsFilePath )
+     const updated = productsDB.map(product => String(product._id)===req.params.id ? {...product,updatedAt: new Date(), imageUrl: req.params.id + ".jpg"}: product)
+    
+     await writeDB(productsFilePath ,updated )
+     res.send("ok")
+   
+
+     
+}
+catch(error){
+  console.log(error)
+  next(error)
+}
+})
 
 
 /// getting products with specific query 
 router.get("/", async(req, res,next) => {
   try{ 
       const productsDB =  await readDB(productsFilePath )
-      if (req.query && req.query.category) {
-        const filteredproducts = productsDB.filter(
+      if (req.query && req.query.name) {
+        const filteredproductss = productsDB.filter(
           products =>
-            products.hasOwnProperty("category") &&
-            products.category.toLowerCase() === req.query.category.toLowerCase()
+            products.hasOwnProperty("name") &&
+            products.name.toLowerCase() === req.query.name.toLowerCase()
         )
-        res.send(filteredproducts)
+        res.send(filteredproductss)
       } else {
         res.send(productsDB)
   }}
@@ -77,6 +103,7 @@ router.post("/",
     .withMessage("add your student Id!"),
 ],
 async (req, res, next) => {
+  
       try{
        
           const errors = validationResult(req)
@@ -95,42 +122,21 @@ async (req, res, next) => {
               imageUrl: ``
 
             }
-    
             productsDB.push(newproducts)
             await writeDB(productsFilePath ,productsDB )
-            res.send(newproducts)
-    
-            res.status(201).send({ id: newproducts.ID })
+            res.status(201).send(newproducts)
+            //res.status(201).send({ id: newproducts.ID })
             
+           
           }
         } 
         
-    catch(error){next(error)
-    }
-  
-})
-
-
-
-/// uploading image by id
-router.post("/:id/upload", upload.single("image"), async (req, res,next) => {
-  try{
-    await writeFile(
-      path.join(productsFolderPath, req.params.id + ".jpg"),
-      req.file.buffer
-      )
-     const productsDB = await readDB(productsFilePath )
-     const updated = productsDB.map(product => product._id===req.params.id ? {...product,updatedAt: new Date(), imageUrl: req.params.id + ".jpg"}: product)
-    
-     await writeDB(productsFilePath ,updated )
-     res.send(updated)
-    }
     catch(error){
       console.log(error)
       next(error)
     }
-    })
-
+  
+})
 
 ///EDITIN' BY ID
 router.put("/:id", async (req, res, next) => {
@@ -160,7 +166,7 @@ router.put("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
   try {
     const productsDB = await readDB(productsFilePath )
-    const products  = productsDB.filter(product => String(product._id) !== req.params.id)
+    const products  = productsDB.filter(products => products._id !== req.params.id)
     await writeDB(productsFilePath ,products  )
 
     res.status(204).send()
