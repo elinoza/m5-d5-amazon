@@ -32,7 +32,19 @@ router.get("/", async (req, res,next) => {
 
 
     router.get("/:id", async (req, res, next) => {
-        try {
+
+      try {
+        const reviewsDB = await readDB(reviewsFilePath); 
+        const singlereview = reviewsDB.filter(
+          (review) => review.elementId === req.params.id
+        );
+        res.status(200).send(singlereview); 
+      } catch (err) {
+        err.httpStatusCode = 404;
+        next(err);
+      }
+       /* try {
+          console.log("1 ")
           const reviewsDB = await readDB(reviewsFilePath); 
           const singlereview = reviewsDB.filter(
             (review) => review.ID === req.params.id
@@ -47,8 +59,9 @@ router.get("/", async (req, res,next) => {
         } catch (err) {
           err.httpStatusCode = 404;
           next(err);
-        }
+        }*/
       });
+    
       router.post(
         "/",
         
@@ -71,7 +84,9 @@ router.get("/", async (req, res,next) => {
           check("elementId")
             .exists()
             .isLength({ min: 1 })
-            .custom((val,{req})=>{
+            .custom(async(val,{req})=>{
+           
+              const productDB = await readDB(productFilePath)
                 if(!productDB.find(product=> product._id===req.body.elementId)) {
                     throw new Error("The product id doesn't exists ") 
             }})
@@ -89,13 +104,14 @@ router.get("/", async (req, res,next) => {
             const reviewsDB = await readDB(reviewsFilePath); 
              const productDB = await readDB(productFilePath)
              console.log("product data",productDB)
-             
+             if (productDB.find(product=> product._id===req.body.elementId)) {
                  const newreview = req.body;
             
             newreview.ID = uniqid(); 
            
             newreview.CreationDate = new Date(); 
             reviewsDB.push(newreview); 
+             }
             await writeDB(reviewsFilePath, reviewsDB); 
             res.status(201).send(reviewsDB); 
               }

@@ -1,1 +1,115 @@
-[{"_id":1002,"name":"Box tape","description":"Packing tape, 2\"","brand":"samsung","price":"3.99","category":"phone"},{"_id":1003,"name":"Foam padding","description":"Packing foam for any size box","brand":"apple","price":"8.50","category":"phone"},{"_id":1004,"name":"Box tape","description":"Packing tape, 2\"","brand":"apple","price":"3.99","category":"phone"},{"name":"Box tape","description":"Packing tape, 2\"","brand":"samsung","price":"3.99","category":"phone","_id":"hoteu3pskik56io6","modifiedAt":"2020-12-11T10:43:09.701Z"},{"name":"NEW2","description":"Packing tape, 2\"","brand":"samsung","price":"3.99","category":"phone","_id":"hoteu4irkikacpyf","createdAt":"2020-12-11T13:07:57.158Z","imageUrl":"hoteu4irkikacpyf.jpg"}]
+[
+  {
+    "_id": 1002,
+    "name": "Box tape",
+    "description": "Packing tape, 2\"",
+    "brand": "samsung",
+    "price": "3.99",
+    "category": "phone"
+  },
+  {
+    "_id": 1003,
+    "name": "Foam padding",
+    "description": "Packing foam for any size box",
+    "brand": "apple",
+    "price": "8.50",
+    "category": "phone"
+  },
+  {
+    "_id": 1004,
+    "name": "Box tape",
+    "description": "Packing tape, 2\"",
+    "brand": "apple",
+    "price": "3.99",
+    "category": "phone"
+  },
+  {
+    "name": "Box tape",
+    "description": "Packing tape, 2\"",
+    "brand": "samsung",
+    "price": "3.99",
+    "category": "phone",
+    "_id": "hoteu3pskik56io6",
+    "modifiedAt": "2020-12-11T10:43:09.701Z"
+  },
+  {
+    "name": "NEW2",
+    "description": "Packing tape, 2\"",
+    "brand": "samsung",
+    "price": "3.99",
+    "category": "phone",
+    "_id": "hoteu4irkikacpyf",
+    "createdAt": "2020-12-11T13:07:57.158Z",
+    "imageUrl": "hoteu4irkikacpyf.jpg"
+  },
+  {
+    "_id": "4p67557kkikh2vi4",
+    "name": "Box tape",
+    "description": "Packing tape, 2\"",
+    "brand": "samsung",
+    "price": "3.99",
+    "category": "phone",
+    "createdAt": "2020-12-11T16:16:15.099Z",
+    "imageUrl": ""
+  },
+  {
+    "_id": "4p67551fokikh3u7t",
+    "name": "Box tape",
+    "description": "Packing tape, 2\"",
+    "brand": "samsung",
+    "price": "3.99",
+    "category": "phone",
+    "createdAt": "2020-12-11T16:17:00.088Z",
+    "imageUrl": ""
+  },
+  {
+    "name": "Box tape",
+    "description": "Packing tape, 2\"",
+    "brand": "samsung",
+    "price": "3.99",
+    "category": "phone",
+    "_id": "4p6755aeckikh447j",
+    "createdAt": "2020-12-11T16:17:13.038Z",
+    "imageUrl": ""
+  },
+  {
+    "name": "Box tape",
+    "description": "Packing tape, 2\"",
+    "brand": "samsung",
+    "price": "3.99",
+    "category": "phone",
+    "_id": "4p67556hkkikhb025",
+    "createdAt": "2020-12-11T16:22:34.253Z",
+    "imageUrl": ""
+  },
+  {
+    "name": "Box tape",
+    "description": "Packing tape, 2\"",
+    "brand": "samsung",
+    "price": "3.99",
+    "category": "phone",
+    "_id": "4p67551i8kikhdgi3",
+    "createdAt": "2020-12-11T16:24:28.874Z",
+    "imageUrl": ""
+  },
+  {
+    "name": "Box tape",
+    "description": "Packing tape, 2\"",
+    "brand": "samsung",
+    "price": "3.99",
+    "category": "phone",
+    "_id": "4p67553w0kiki4ja7",
+    "createdAt": "2020-12-11T16:45:32.190Z",
+    "imageUrl": ""
+  },
+  {
+    "name": "Box tape",
+    "description": "Packing tape, 2\"",
+    "brand": "samsung",
+    "price": "3.99",
+    "category": "phone",
+    "_id": "4p67556lokiki7zdm",
+    "createdAt": "2020-12-11T16:48:13.017Z",
+    "imageUrl": ""
+  }
+]
