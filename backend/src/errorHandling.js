@@ -27,6 +27,7 @@ const notFoundHandler = (err, req, res, next) => {
   };
   
   const catchAllHandler = (err, req, res, next) => {
+    console.log(err)
     if (!res.headersSent) {
       res.status(500).send("server is going down");
     }
