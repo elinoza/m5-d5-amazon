@@ -37,36 +37,7 @@ const productsDB =  await readDB(productsFilePath )
   }
 })
 
-/// uploading image by id
 
-router.post("/:id/upload", upload.single("image"), async (req, res,next) => {
-  try{
-    
-    await writeFile(
-      path.join(productsFolderPath, req.params.id + ".jpg"),
-      req.file.buffer
-      )
-      //read json
-      //update product ımageUrl wıth 
-      
-
-     const productsDB = await readDB(productsFilePath )
-     const updated = productsDB.map(product => product._id===req.params.id ? {...product,updatedAt: new Date(), imageUrl: req.params.id + ".jpg"}: product)
-    
-     await writeDB(productsFilePath ,updated )
-     res.send("ok")
-
-     
-
-    //   }
-
-     
-}
-catch(error){
-  console.log(error)
-  next(error)
-}
-})
 
 
 /// getting products with specific query 
@@ -138,6 +109,28 @@ async (req, res, next) => {
     }
   
 })
+
+
+
+/// uploading image by id
+router.post("/:id/upload", upload.single("image"), async (req, res,next) => {
+  try{
+    await writeFile(
+      path.join(productsFolderPath, req.params.id + ".jpg"),
+      req.file.buffer
+      )
+     const productsDB = await readDB(productsFilePath )
+     const updated = productsDB.map(product => product._id===req.params.id ? {...product,updatedAt: new Date(), imageUrl: req.params.id + ".jpg"}: product)
+    
+     await writeDB(productsFilePath ,updated )
+     res.send(updated)
+    }
+    catch(error){
+      console.log(error)
+      next(error)
+    }
+    })
+
 
 ///EDITIN' BY ID
 router.put("/:id", async (req, res, next) => {
